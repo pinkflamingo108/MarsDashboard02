@@ -16,10 +16,11 @@ app.use("/", express.static(path.join(__dirname, "../public")));
 
 // Rover Curiosity
 
-app.get("/roverC", async (req, res) => {
+app.get("/roverData/:roverName", async (req, res) => {
+ const { roverName } = req.params;
  try {
   let rovers = await fetch(
-   `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity?sol=1000&api_key=DEMO_KEY`
+   `https://api.nasa.gov/mars-photos/api/v1/rovers/${roverName}?sol=1000&api_key=DEMO_KEY`
   ).then((res) => res.json());
   res.send({ rovers });
  } catch (err) {
